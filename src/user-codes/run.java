@@ -1,5 +1,5 @@
 class Main{
-    public static void main(String args[]){
-        System.out.println("Java says \"F*CK !\" ");
-    }
+  public static void main(String args[]){
+    System.out.println("YOO WASSUP !!")
+  }
 }
