@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { hoverTooltip } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { python } from "@codemirror/lang-python";
 import { java } from "@codemirror/lang-java";
 import { cpp } from "@codemirror/lang-cpp";
+import Loading from "./Loading";
 
 export default function Compiler() {
     const [code, setCode] = useState("");
@@ -13,6 +14,8 @@ export default function Compiler() {
     const [input, setInput] = useState("");
     const [language, setLanguage] = useState("js");
     const [theme,setTheme] = useState("dark")
+    const [loading,setLoading] = useState(false)
+
     const getLanguage = () => {
         switch (language) {
             case "py":
@@ -27,6 +30,7 @@ export default function Compiler() {
                 return [];
         }
     };
+    
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value)
         setCode(localStorage.getItem(e.target.value))
@@ -35,24 +39,21 @@ export default function Compiler() {
         else setCode("")
         console.log(localStorage.getItem(e.target.value));
     }
-    // const handlekey = (e) => {
-    //     if (e.key === "Tab") {
-    //         e.preventDefault()
-    //         const text = e.target
-    //         const start = text.selectionStart
-    //         const end = text.selectionEnd
-    //         text.value = text.value.substring(0, start) + "    " + text.value.substring(end)
-    //         text.selectionStart = text.selectionEnd = start + 4;
-    //     }
-    // }
+    
+    const switchTheme = ()=>{
+        theme=="light" ? setTheme("dark") : setTheme("light")
+    }
+
     const runCode = () => {
         localStorage.setItem(language, code)
+        setLoading(true)
         axios.post("http://127.0.0.1:5000/run", { "code": code, "input": input, "language": language })
             .then((response) => {
                 console.log(response)
                 setOutput(response.data.output)
             })
             .catch(error => console.error(error))
+            .finally(()=>setLoading(false))
     }
     return (
         <div className="compiler-container">
@@ -68,7 +69,7 @@ export default function Compiler() {
                     <option value="java">Java</option>
                     <option value="cpp">C++</option>
                 </select>
-                <button>Switch to { theme=="dark" ? "dark theme" : "light theme" }</button>
+                <button onClick={switchTheme} className={"theme-button-"+theme} >Switch to { theme=="dark" ? "light theme" : "dark theme" }</button>
                 <button onClick={() => localStorage.setItem(language, code)} className="save-button">Save</button>
                 <button onClick={runCode} className="run-button">Run</button>
 
@@ -85,11 +86,12 @@ export default function Compiler() {
             <div className="input-output">
                 <div className="input">
                     <h3>Input</h3>
-                    <textarea onChange={(e) => { setInput(e.target.value) }} /*onKeyDown={handlekey}*/ placeholder="Enter your Inputs here" ></textarea>
+                    <textarea onChange={(e) => { setInput(e.target.value) }} placeholder="Enter your Inputs here" ></textarea>
                 </div>
                 <pre className="output">
                     <h3>Output</h3>
-                    {output}</pre>
+                    {loading ? <Loading/> : output}
+                </pre>
             </div>
         </div>
     )

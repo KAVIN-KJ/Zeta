@@ -63,6 +63,41 @@ button{
     color: white;
     box-shadow: 0px 0px 20px rgb(0, 0, 0);
 }
+
+.theme-button-dark{
+    border: none;
+    padding: 10px;
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.theme-button-dark:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    box-shadow: 0px 0px 20px black;
+}
+
+.theme-button-light{
+    border: none;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+    color: black;
+    border: 1px solid;
+    border-radius: 5px;
+}
+.buttons .theme-button-light:hover{
+    box-shadow: 0px 0px 50px black;
+    color: rgb(255, 255, 255);
+    border: 1px solid black;
+    background-color: rgb(0, 0, 0);
+}
+
+
+
 .buttons .language,option{
     background-color: rgb(60, 60, 60);
     font-weight: bold;
@@ -72,20 +107,16 @@ button{
 }:focus{
     outline: none;
 }
-.text-editor:focus{
-    outline: none;
-}
 
 .text-editor{
     overflow: scroll;
     text-wrap: nowrap;
-    /* resize: horizontal; */
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     padding: 0px;
     margin: 0px 5px;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 .text-editor::-webkit-scrollbar{
     display: none;
@@ -107,7 +138,7 @@ button{
     height: 100%;
     box-sizing: border-box;
     padding: 0px 20px;
-    border-radius: 15px;
+    border-radius: 10px;
     
 }
 .input textarea{
@@ -118,7 +149,7 @@ button{
     font-size: 16px;
     box-sizing: border-box;
     padding: 0px 5px;
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: scroll;
 }::-webkit-scrollbar{
     display: none;
@@ -138,4 +169,21 @@ button{
     overflow: scroll;
 }::-webkit-scrollbar{
     display: none;
+}
+
+
+
+
+.loading-image{
+    width: 50px;
+    animation: rotate 1000ms infinite ease;
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }
