@@ -108,6 +108,25 @@ button{
     outline: none;
 }
 
+
+.code-editor-chatbox{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.chat-bot{
+    flex: 2;
+    height: 100%;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+
 .text-editor{
     overflow: scroll;
     text-wrap: nowrap;
@@ -116,6 +135,7 @@ button{
     box-sizing: border-box;
     padding: 0px;
     margin: 0px 5px;
+    flex: 3;
     border-radius: 10px;
 }
 .text-editor::-webkit-scrollbar{
@@ -186,4 +206,15 @@ button{
     100%{
         transform: rotate(360deg);
     }
+}
+
+
+
+.ZetaBot{
+    
+}
+
+.Message{
+    text-wrap: wrap;
+    text-align: left;
 }

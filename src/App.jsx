@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Complier from './Compiler'
 import Loading from './Loading'
+import ZetaBot from './ZetaBot'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +12,8 @@ function App() {
   return (
     <>
       <div className='app-container'>
-          <Complier/>
+          {/* <Complier/> */}
+          <ZetaBot/>
       </div>
     </>
   )

@@ -13,8 +13,8 @@ export default function Compiler() {
     const [output, setOutput] = useState("");
     const [input, setInput] = useState("");
     const [language, setLanguage] = useState("js");
-    const [theme,setTheme] = useState("dark")
-    const [loading,setLoading] = useState(false)
+    const [theme, setTheme] = useState("dark")
+    const [loading, setLoading] = useState(false)
 
     const getLanguage = () => {
         switch (language) {
@@ -30,18 +30,19 @@ export default function Compiler() {
                 return [];
         }
     };
-    
+
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value)
+        localStorage.setItem("CurrentLang",e.target.value)
         setCode(localStorage.getItem(e.target.value))
         let temp = localStorage.getItem(e.target.value);
         if (temp != null) setCode(temp)
         else setCode("")
         console.log(localStorage.getItem(e.target.value));
     }
-    
-    const switchTheme = ()=>{
-        theme=="light" ? setTheme("dark") : setTheme("light")
+
+    const switchTheme = () => {
+        theme == "light" ? setTheme("dark") : setTheme("light")
     }
 
     const runCode = () => {
@@ -53,7 +54,7 @@ export default function Compiler() {
                 setOutput(response.data.output)
             })
             .catch(error => console.error(error))
-            .finally(()=>setLoading(false))
+            .finally(() => setLoading(false))
     }
     return (
         <div className="compiler-container">
@@ -69,20 +70,25 @@ export default function Compiler() {
                     <option value="java">Java</option>
                     <option value="cpp">C++</option>
                 </select>
-                <button onClick={switchTheme} className={"theme-button-"+theme} >Switch to { theme=="dark" ? "light theme" : "dark theme" }</button>
+                <button onClick={switchTheme} className={"theme-button-" + theme} >Switch to {theme == "dark" ? "light theme" : "dark theme"}</button>
                 <button onClick={() => localStorage.setItem(language, code)} className="save-button">Save</button>
                 <button onClick={runCode} className="run-button">Run</button>
 
             </div>
-            <CodeMirror
-                height="100%"
-                value={code}
-                theme={theme}
-                className="text-editor"
-                extensions={[getLanguage()]}
-                onChange={(value) => setCode(value)}
-                style={{ animation:"none", fontSize: `${fosi}px` }}
-            />
+            <div className="code-editor-chatbox">
+                <CodeMirror
+                    height="100%"
+                    value={code}
+                    theme={theme}
+                    className="text-editor"
+                    extensions={[getLanguage()]}
+                    onChange={(value) => setCode(value)}
+                    style={{ animation: "none", fontSize: `${fosi}px` }}
+                />
+                <div className="chat-bot">
+                        {localStorage.getItem(localStorage.getItem("CurrentLang"))}
+                </div>
+            </div>
             <div className="input-output">
                 <div className="input">
                     <h3>Input</h3>
@@ -90,7 +96,7 @@ export default function Compiler() {
                 </div>
                 <pre className="output">
                     <h3>Output</h3>
-                    {loading ? <Loading/> : output}
+                    {loading ? <Loading /> : output}
                 </pre>
             </div>
         </div>

@@ -1,12 +1,20 @@
 import json
 from flask import Flask,request,jsonify 
 import subprocess
+import os
 from flask_cors import CORS
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+API_KEY = os.getenv("GROQ_KEY")
+
+
 import os
 app = Flask(__name__)
 CORS(app)
 
-
+# COMPILE AND RUN
 @app.route('/run',methods=['POST'])
 def run():
     data = request.json
@@ -61,9 +69,39 @@ def run():
     return json.dumps({"output":output})
 
 
+# CHATBOT
+@app.route('/zetaBot',methods=["POST"])
+def zetaBot():
+    data = request.json
+    prompt = data["prompt"]
+    code = data["code"]
+    print(prompt)
+    client = Groq(api_key="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")
+    chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "role": "system",
+            "content": "you are a helpful assistant. who will help newbie Programmers to understand and solve errors in their programs. Always make sure to give links to any relevant web-articles for the user to learn, Give High preference to Youtube video links also make sure to generate your responses in proper markdown so that I can render it to my frontend Make sure not to give too many newline characters in your response"
+        },
+        {
+            "role": "user",
+            "content": code +"\n"+ prompt,
+        }
+    ],
+    model="llama3-70b-8192",
+    temperature=0.5,
+    max_completion_tokens=1024,
+    top_p=1,
+    stop=None,
+    stream=False,
+    )
+    return json.dumps({"response":chat_completion.choices[0].message.content})
+    
+
+
 
 @app.route('/')
 def root():
     return "The ROOT page !"
 
-app.run()
+app.run(debug=True)
