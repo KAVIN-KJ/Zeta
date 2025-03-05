@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <div className='app-container'>
-          {/* <Complier/> */}
-          <ZetaBot/>
+          <Complier/>
+          {/* <ZetaBot/> */}
       </div>
     </>
   )

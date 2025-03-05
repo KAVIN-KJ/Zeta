@@ -6,6 +6,7 @@ import { python } from "@codemirror/lang-python";
 import { java } from "@codemirror/lang-java";
 import { cpp } from "@codemirror/lang-cpp";
 import Loading from "./Loading";
+import ZetaBot from "./ZetaBot";
 
 export default function Compiler() {
     const [code, setCode] = useState("");
@@ -86,7 +87,7 @@ export default function Compiler() {
                     style={{ animation: "none", fontSize: `${fosi}px` }}
                 />
                 <div className="chat-bot">
-                        {localStorage.getItem(localStorage.getItem("CurrentLang"))}
+                        <ZetaBot/>
                 </div>
             </div>
             <div className="input-output">
