@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import './App.css'
 import axios from "axios";
 import ReactMarkdown from 'react-markdown'
-export default function ZetaBot() {
+import sendLight from './assets/send-button-white.svg'
+export default function ZetaBot(props) {
     const [response, setResponse] = useState("")
     const [prompt, setPrompt] = useState("")
 
     const postRequest = () => {
-        axios.post("http://127.0.0.1:5000/zetaBot", { code: "", prompt: prompt })
+        axios.post("http://127.0.0.1:5000/zetaBot", { code: props.code, prompt: prompt })
             .then((res) => {
                 setResponse(res.data.response)
             })
@@ -22,7 +23,7 @@ export default function ZetaBot() {
             </pre>
             <div className="input-prompt">
                 <input  onChange={(e) => setPrompt(e.target.value)} type="text" name="" id="" />
-                <button onClick={postRequest} >Post</button>
+                <button onClick={postRequest} > <img width={30} src={sendLight} alt="" /> </button>
             </div>
         </div>
     )

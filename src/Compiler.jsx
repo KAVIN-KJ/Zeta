@@ -87,7 +87,7 @@ export default function Compiler() {
                     style={{ animation: "none", fontSize: `${fosi}px` }}
                 />
                 <div className="chat-bot">
-                        <ZetaBot/>
+                        <ZetaBot code={code}/>
                 </div>
             </div>
             <div className="input-output">
