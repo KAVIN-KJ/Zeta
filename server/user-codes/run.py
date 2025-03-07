@@ -1,23 +1,13 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.animation as animation
+def greet(name):
+    print("Hello, " + name)
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+greet("Alice")
 
-# Create the donut
-u = np.linspace(0, 2 * np.pi, 100)
-v = np.linspace(0, np.pi, 100)
-x = 10 * np.outer(np.cos(u), np.sin(v))
-y = 10 * np.outer(np.sin(u), np.sin(v))
-z = 10 * np.outer(np.ones(np.size(u)), np.cos(v))
+for i in range(5):
+    print("Iteration:", i)
 
-ax.plot_surface(x, y, z, color='b')
+x = 10
+if x == 10:
+    print("x is ten")
 
-def rotate(angle):
-    ax.view_init(elev=10., azim=angle)
-
-ani = animation.FuncAnimation(fig, rotate, frames=np.arange(0, 362, 2), interval=100)
-
-plt.show()
+print("This will cause an error")

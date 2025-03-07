@@ -19,6 +19,8 @@
     "@uiw/react-codemirror": "^4.23.9",
     "axios": "^1.8.1",
     "codemirror": "^5.65.18",
+    "cors": "^2.8.5",
+    "mongoose": "^8.12.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.0.1"
