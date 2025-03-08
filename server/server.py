@@ -76,12 +76,12 @@ def zetaBot():
     prompt = data["prompt"]
     code = data["code"]
     print(prompt)
-    client = Groq(api_key="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")
+    client = Groq(api_key=API_KEY)
     chat_completion = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "you are a helpful assistant and your name is \"Zeta Bot\". who will help newbie Programmers to understand and solve errors in their programs. Always make sure to give links to any relevant web-articles for the user to learn, Give High preference to Youtube video links also make sure to generate your responses in proper markdown so that I can render it to my frontend Make sure not to give too many newline characters in your response"
+            "content": "you are a helpful assistant and your name is \"Zeta Bot\". who will help newbie Programmers to understand and solve errors in their programs. Always make sure to give links to any relevant web-articles only when relevant for the user to learn, Give High preference to Youtube video links also make sure to generate your responses in proper markdown so that I can render it to my frontend Make sure not to give too many newline characters in your response. also don't give the corrected code right away. try to teach the user and provide a code output only when asked explicitly"
         },
         {
             "role": "user",
