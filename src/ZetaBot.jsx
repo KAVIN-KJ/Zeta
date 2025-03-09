@@ -1,24 +1,30 @@
 import { useState, useEffect } from "react";
 import './App.css'
 import axios from "axios";
+import { configDotenv } from "dotenv";
 import ReactMarkdown from 'react-markdown'
 import sendLight from './assets/send-button-white.svg'
+import Loading from "./Loading";
 export default function ZetaBot(props) {
     const [response, setResponse] = useState("")
     const [prompt, setPrompt] = useState("")
-
+    const [loading,setLoading] = useState(false)
+    const url = import.meta.env.VITE_VM_HOST
     const postRequest = () => {
-        axios.post("http://127.0.0.1:5000/zetaBot", { code: props.code, prompt: prompt })
+        setLoading(true)
+        axios.post(url+"/zetaBot", { code: props.code, prompt: prompt })
             .then((res) => {
                 setResponse(res.data.response)
             })
             .catch(error => console.error(error))
+            .finally(()=>setLoading(false))
     }
 
     return (
         <div className="ZetaBot">
             <pre className="Message">
-                <ReactMarkdown children={response} />
+                {loading ? <Loading/> :  <ReactMarkdown children={response} />}
+               
                 {/* {response} */}
             </pre>
             <div className="input-prompt">

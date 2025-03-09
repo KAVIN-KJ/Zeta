@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import ZetaBot from "./ZetaBot";
 
 export default function Compiler() {
+    const url = import.meta.env.VITE_VM_HOST
     const [code, setCode] = useState("");
     const [fosi, setFosi] = useState(16);
     const [output, setOutput] = useState("");
@@ -34,7 +35,7 @@ export default function Compiler() {
 
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value)
-        localStorage.setItem("CurrentLang",e.target.value)
+        localStorage.setItem("CurrentLang", e.target.value)
         setCode(localStorage.getItem(e.target.value))
         let temp = localStorage.getItem(e.target.value);
         if (temp != null) setCode(temp)
@@ -49,7 +50,7 @@ export default function Compiler() {
     const runCode = () => {
         localStorage.setItem(language, code)
         setLoading(true)
-        axios.post("http://127.0.0.1:5000/run", { "code": code, "input": input, "language": language })
+        axios.post(url + "/run", { "code": code, "input": input, "language": language })
             .then((response) => {
                 console.log(response)
                 setOutput(response.data.output)
@@ -87,7 +88,7 @@ export default function Compiler() {
                     style={{ animation: "none", fontSize: `${fosi}px` }}
                 />
                 <div className="chat-bot">
-                        <ZetaBot code={code}/>
+                    <ZetaBot code={code} />
                 </div>
             </div>
             <div className="input-output">
@@ -95,10 +96,12 @@ export default function Compiler() {
                     <h3>Input</h3>
                     <textarea onChange={(e) => { setInput(e.target.value) }} placeholder="Enter your Inputs here" ></textarea>
                 </div>
-                <pre className="output">
+                <div className="output">
                     <h3>Output</h3>
-                    {loading ? <Loading /> : output}
-                </pre>
+                    <pre>
+                        {loading ? <Loading /> : output}
+                    </pre>
+                </div>
             </div>
         </div>
     )
