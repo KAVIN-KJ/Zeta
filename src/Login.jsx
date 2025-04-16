@@ -16,26 +16,26 @@ const Login = (props) => {
             console.log(auth.currentUser.uid)
             localStorage.setItem("currentUser", auth?.currentUser?.uid)
             // props.setCurrentUser(auth?.currentUser?.uid);
+            window.location.reload()
         }
         catch (FirebaseError) {
+            alert("Something went wrong");
             console.error(FirebaseError);
-        }
-        finally{
-            window.location.reload()
         }
     }
 
-    const onGoogleLogin = async () => {
+    const onGoogleLogin = async (e) => {
+        e.preventDefault();
         try {
             await signInWithPopup(auth, googleAuth)
             localStorage.setItem("currentUser", auth?.currentUser?.uid)
             await addDocument({ uid: auth?.currentUser?.uid, email: auth?.currentUser?.email });
-        } catch (error) {
-            console.error(error)
-        }
-        finally{
             window.location.reload()
+        } catch (error) {
+            alert("Something went wrong");
+            console.error(error);
         }
+
     }
 
     const [email, setEmail] = useState("");
@@ -49,7 +49,7 @@ const Login = (props) => {
             <span>Password</span>
             <input required="true" onChange={(e) => setPassword(e.target.value)} type="password" />
             <button onClick={(e)=>onLogin(e)} >Login</button>
-            <button onClick={onGoogleLogin} >Login with google</button>
+            <button onClick={(e)=>onGoogleLogin(e)} >Login with google</button>
             <Link to='/signup' >Create a new account ?</Link>
 
         </form>

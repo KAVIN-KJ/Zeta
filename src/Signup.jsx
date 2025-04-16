@@ -7,33 +7,30 @@ import { FirebaseError } from 'firebase/app'
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 
 const Signup = (props) => {
-    const navigate = useNavigate();
-    const onSignup = async () => {
+    const onSignup = async (e) => {
+        e.preventDefault();
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             await addDocument({ uid: auth?.currentUser?.uid, email: auth?.currentUser?.email });
             localStorage.setItem("currentUser",auth?.currentUser?.uid)
-            navigate("/")
+            window.location.reload()
         }
         catch (FirebaseError) {
             console.error(FirebaseError);
             alert("Invalid credentials")
         }
-        finally{
-            window.location.reload()
-        }
+
     }
 
-    const onGoogleLogin = async () => {
+    const onGoogleLogin = async (e) => {
+        e.preventDefault();
         try {
             await signInWithPopup(auth, googleAuth)
             await addDocument({ uid: auth?.currentUser?.uid, email: auth?.currentUser?.email });
             localStorage.setItem("currentUser",auth?.currentUser?.uid)
+            window.location.reload()
         } catch (error) {
             console.error(error)
-        }
-        finally{
-            window.location.reload()
         }
     }
 
@@ -48,8 +45,8 @@ const Signup = (props) => {
             <input required="true" onChange={(e) => setEmail(e.target.value)} type="email" placeholder='e-mail' />
             <span>Password</span>
             <input required="true" onChange={(e) => setPassword(e.target.value)} type="password" />
-            <button onClick={onSignup} >Signup</button>
-            <button onClick={onGoogleLogin} >Signup with google</button>
+            <button onClick={(e)=>onSignup(e)} >Signup</button>
+            <button onClick={(e)=>onGoogleLogin(e)} >Signup with google</button>
             <Link to='/' >Already have an account ?</Link>
         </div>
     )
