@@ -48,7 +48,19 @@ body{
 .buttons .save-button:hover{
     background-color: rgb(0, 20, 199);
     color: white;
-    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+}
+
+.buttons .logout-button{
+    border: none;
+    padding: 10px;
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+}
+
+.buttons .logout-button:hover{
+    background-color: red;
 }
 
 .fosi{
@@ -65,7 +77,6 @@ body{
 .run-button:hover{
     background-color: rgb(0, 199, 0);
     color: white;
-    box-shadow: 0px 0px 20px rgb(0, 0, 0);
 }
 
 .theme-button-dark{

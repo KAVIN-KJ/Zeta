@@ -7,6 +7,8 @@ import { java } from "@codemirror/lang-java";
 import { cpp } from "@codemirror/lang-cpp";
 import Loading from "./Loading";
 import ZetaBot from "./ZetaBot";
+import { auth } from "./firebase";
+import { signOut } from "firebase/auth";
 
 export default function Compiler() {
     const url = import.meta.env.VITE_VM_HOST
@@ -47,6 +49,19 @@ export default function Compiler() {
         theme == "light" ? setTheme("dark") : setTheme("light")
     }
 
+    const logout = async () =>{
+        try{
+            await signOut(auth);
+            localStorage.clear("currentUser")
+        }
+        catch(e){
+            console.error(e)
+        }
+        finally{
+            window.location.reload();
+        }
+    }
+
     const runCode = () => {
         localStorage.setItem(language, code)
         setLoading(true)
@@ -75,7 +90,8 @@ export default function Compiler() {
                 <button onClick={switchTheme} className={"theme-button-" + theme} >Switch to {theme == "dark" ? "light theme" : "dark theme"}</button>
                 <button onClick={() => localStorage.setItem(language, code)} className="save-button">Save</button>
                 <button onClick={runCode} className="run-button">Run</button>
-
+                <button onClick={logout} className="logout-button" >Logout</button>
+ 
             </div>
             <div className="code-editor-chatbox">
                 <CodeMirror
