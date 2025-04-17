@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { collection, getFirestore, addDoc, query, updateDoc, where, getDocs } from 'firebase/firestore'
+import { collection, getFirestore, addDoc, query, updateDoc, where, getDocs, getDoc } from 'firebase/firestore'
 import { getAuth, GoogleAuthProvider} from 'firebase/auth'
 
 
@@ -50,4 +50,27 @@ export const addDocument = async(data)=>{
         console.error(e)
     }
 }
+
+
+export const getDocument = async (uid)=>{
+    try{
+        const q = query(collectionRef,where("uid","==",uid))
+        const snapshot = await getDocs(q)
+
+        if(!snapshot.empty){
+            const doc = snapshot.docs[0];
+            console.log(doc.data())
+            return doc.data();
+        }
+        else{
+            console.log("null")
+            return null;
+        }
+    }
+    catch(e){
+        console.error(e)
+    }
+}
+
+
 export {app,auth,db}

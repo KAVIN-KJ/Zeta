@@ -1,0 +1,126 @@
+/* styles/FileList.css */
+
+.filelist-overlay{
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* z-index: 1; */
+}
+
+.close-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+
+}
+
+.filelist-container {
+    min-width: 500px;
+    animation: appear 500ms ease;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    border: 1px solid;
+    flex-direction: column;
+    gap: 20px;
+    background-color: white;
+    transition: 500ms ease;
+}
+@keyframes appear{
+    from{
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.newfile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.newfile input[type="text"] {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+    font-size: 14px;
+    overflow: hidden;
+    transition: 500ms ease;
+
+}
+.newfile input[type="text"]:focus{
+    outline: none;
+    border: 2px solid blue;
+    box-shadow: 0px 0px 10px blue;
+}
+
+.newfile button {
+    padding: 5px 6px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    cursor: pointer;
+}
+.newfile button:hover{
+    background-color: blue;
+}
+
+.filelist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 8px;
+    border: 2px solid rgb(201, 201, 201);
+    overflow: hidden;
+    transition: 300ms ease;
+}
+
+.file span {
+    flex: 1;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+    cursor: pointer;
+}
+.file:hover{
+    transform: translateY(-4px);
+    box-shadow: 0px 0px 10px blue;
+    border: 2px solid blue;
+}
+
+.deletebutton {
+    border: none;
+    background-color: black;
+    padding: 5px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.deletebutton:hover{
+    background-color: red;
+}

@@ -42,9 +42,9 @@ const Signup = (props) => {
         <div className='login'>
             <h1>Signup</h1>
             <span>Email</span>
-            <input required="true" onChange={(e) => setEmail(e.target.value)} type="email" placeholder='e-mail' />
+            <input autoComplete="email" required="true" onChange={(e) => setEmail(e.target.value)} type="email" placeholder='e-mail' />
             <span>Password</span>
-            <input required="true" onChange={(e) => setPassword(e.target.value)} type="password" />
+            <input autoComplete="new-password" required="true" onChange={(e) => setPassword(e.target.value)} type="password" />
             <button onClick={(e)=>onSignup(e)} >Signup</button>
             <button onClick={(e)=>onGoogleLogin(e)} >Signup with google</button>
             <Link to='/' >Already have an account ?</Link>

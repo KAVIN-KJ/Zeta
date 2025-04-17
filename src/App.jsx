@@ -6,19 +6,20 @@ import Complier from './Compiler'
 import { useEffect } from 'react'
 import Compiler from './Compiler'
 import Auth from './Auth'
-
+import FileList from './FileList'
 function App() {
   return (
     <>
       <div className='app-container'>
-        {/* <Complier/>
-          <ZetaBot/> */}
-        {/* <Login/>
-          <Signup/> */}
-        {/* {currentUser != null && currentUser != "null" ? <Complier /> : <Auth setCurrentUser={setCurrentUser} />} */}
-        { 
-          localStorage.getItem("currentUser")!=="null" && localStorage.getItem("currentUser")!==null ? <Compiler/> : <Auth/>
+        {
+          localStorage.getItem("currentUser") !== "null" && localStorage.getItem("currentUser") !== null ? (
+            <>
+              <Compiler />
+            </>
+          ) :
+            <Auth />
         }
+
       </div>
     </>
   )
