@@ -130,7 +130,7 @@ export default function Compiler() {
                     className="text-editor"
                     extensions={[getLanguage()]}
                     onChange={(value) => setCode(value)}
-                    style={{ animation: "none", fontSize: `${fosi}px` }}
+                    style={{ animation: "none", fontSize: `${fosi}px`,border:"1px solid" }}
                 />
                 <div className="chat-bot">
                     <ZetaBot code={code} />

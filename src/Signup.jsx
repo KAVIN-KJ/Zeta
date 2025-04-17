@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { auth, addDocument, googleAuth } from './firebase'
 import { Link,useNavigate } from 'react-router-dom'
 import { FirebaseError } from 'firebase/app'
+import googleLogo from './assets/google-logo.svg'
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 
 const Signup = (props) => {
@@ -44,9 +45,9 @@ const Signup = (props) => {
             <span>Email</span>
             <input autoComplete="email" required="true" onChange={(e) => setEmail(e.target.value)} type="email" placeholder='e-mail' />
             <span>Password</span>
-            <input autoComplete="new-password" required="true" onChange={(e) => setPassword(e.target.value)} type="password" />
+            <input autoComplete="new-password" required="true" onChange={(e) => setPassword(e.target.value)} type="password" placeholder='password' />
             <button onClick={(e)=>onSignup(e)} >Signup</button>
-            <button onClick={(e)=>onGoogleLogin(e)} >Signup with google</button>
+            <button className='google-auth' onClick={(e)=>onGoogleLogin(e)} >Login/Signup with google<img width="30px" src={googleLogo} alt="" /></button>
             <Link to='/' >Already have an account ?</Link>
         </div>
     )
