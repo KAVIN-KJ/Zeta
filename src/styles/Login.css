@@ -103,7 +103,6 @@ button:active{
     font-weight: 500;
 }
 .auth .description{
-    border: 1px solid;
     color: white;
     height: 100vh;
     display: flex;
